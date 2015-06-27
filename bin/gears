@@ -1,11 +1,6 @@
 #!/usr/bin/env ruby
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'gears'
 
-chainring = 52
-cog = 11
-ratio = chainring / cog.to_f
-puts ratio
-
-chainring = 30
-cog = 27
-ratio = chainring / cog.to_f
-puts ratio
+puts Gear.new(52, 11).ratio
+puts Gear.new(30, 27).ratio
