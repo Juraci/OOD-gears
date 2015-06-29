@@ -1,10 +1,10 @@
 class Gear
   attr_reader :chainring, :cog, :wheel
 
-  def initialize(chainring, cog, rim, tire)
+  def initialize(chainring, cog, wheel = nil)
     @chainring = chainring
     @cog = cog
-    @wheel = Wheel.new(rim, tire)
+    @wheel = wheel
   end
 
   def ratio
@@ -13,15 +13,5 @@ class Gear
 
   def gear_inches
     ratio * wheel.diameter
-  end
-
-  # Now you have a Wheel that can calculate its own diameter.
-  # Embedding this Wheel in Gear is obviously not the long-term design goal;
-  # it's more an experiment in code organization. It cleans up Gear
-  # but defers the decision about Wheel.
-  Wheel = Struct.new(:rim, :tire) do
-    def diameter
-      rim + (tire * 2)
-    end
   end
 end
