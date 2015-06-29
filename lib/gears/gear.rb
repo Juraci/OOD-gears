@@ -1,26 +1,27 @@
 class Gear
-  # Please Mr. Gear, what are your tire (size)? is just downright rediculous
-  attr_reader :chainring, :cog, :rim, :tire
+  attr_reader :chainring, :cog, :wheel
 
   def initialize(chainring, cog, rim, tire)
     @chainring = chainring
     @cog = cog
-    @rim = rim
-    @tire = tire
+    @wheel = Wheel.new(rim, tire)
   end
 
-  # Please MR. Gear what is your ratio? seems perfectly resonable
   def ratio
     chainring / cog.to_f
   end
 
-  # Please Mr. Gear, what are your gear_inches? is kind weird
   def gear_inches
-    ratio * diameter
+    ratio * wheel.diameter
   end
 
-  def diameter
-    # tire goes around rim twice for diameter
-    rim + (tire * 2)
+  # Now you have a Wheel that can calculate its own diameter.
+  # Embedding this Wheel in Gear is obviously not the long-term design goal;
+  # it's more an experiment in code organization. It cleans up Gear
+  # but defers the decision about Wheel.
+  Wheel = Struct.new(:rim, :tire) do
+    def diameter
+      rim + (tire * 2)
+    end
   end
 end
