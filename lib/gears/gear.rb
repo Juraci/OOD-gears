@@ -16,7 +16,11 @@ class Gear
 
   # Please Mr. Gear, what are your gear_inches? is kind weird
   def gear_inches
+    ratio * diameter
+  end
+
+  def diameter
     # tire goes around rim twice for diameter
-    ratio * (rim + (tire * 2))
+    rim + (tire * 2)
   end
 end
